@@ -3,6 +3,10 @@ const APIkey = "AIzaSyBFu-GXGYZ9_-BoUvyd3--CsXcQKmA-J6M"
 const searchbar = document.querySelector('#search-bar')
 const btnSearch = document.querySelector('#btn-search')
 const ulBookList = document.querySelector('#book-list')
+const btnShowMore = document.querySelector('#btn-show-more')
+
+
+
 const maxResult = 25
 let startIndex = 0
 let APIdata
@@ -10,23 +14,31 @@ let APIdata
 
 //EVENTOS
 btnSearch.addEventListener('click', async () => {
+    APIdata = null
+    startIndex = 0
+    while (ulBookList.firstChild) {
+        ulBookList.removeChild(ulBookList.firstChild)
+    }
+    APIcall ()
+})
+
+btnShowMore.addEventListener('click', async () => {
+    APIcall ()
+})
+
+//FUNCOES
+async function APIcall () {
     APIdata = await getAPIdata()
 
     for (let i = 0; i < APIdata.items.length; i ++) {
         console.log(i)
         let li = criarElemento(APIdata.items[i])
         ulBookList.append(li)
-        
     }
         
     startIndex += maxResult 
+}
 
-    //https://www.googleapis.com/books/v1/volumes?q=guia%20do%20mochilleiro%20das%20galaxias&key=AIzaSyBFu-GXGYZ9_-BoUvyd3--CsXcQKmA-J6M
-    //const elementoCardBook = criarElemento()
-   // ulBookList.append(elementoCardBook)
-})
-
-//FUNCOES
 async function getAPIdata () {
     const searchValue = searchbar.value
     let apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${searchValue}&startIndex=${startIndex}&maxResults=${maxResult}&key=${APIkey}`
@@ -51,11 +63,6 @@ function criarElemento(obj) {
     } else {
          imgUrl ='/assets/img/Placeholder-cover-small.jpg'
     }
-    //console.log(imgUrl = obj.volumeInfo.imageLinks.thumbnail)
-    
-    
-  
- 
     
     const li = document.createElement('li')
 
