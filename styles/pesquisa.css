@@ -7,9 +7,20 @@ header {
     justify-content: center;
 }
 
+ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 1em;
+    grid-gap: 1em;
+}
+
 li {
     position: relative;
     padding: 1em;
+}
+
+li img {
+    border-radius: 1em;
 }
 
 li button {

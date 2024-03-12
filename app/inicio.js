@@ -1,21 +1,68 @@
 //VARIAVEIS
+const APIkey = "AIzaSyBFu-GXGYZ9_-BoUvyd3--CsXcQKmA-J6M" 
+const searchbar = document.querySelector('#search-bar')
 const btnSearch = document.querySelector('#btn-search')
 const ulBookList = document.querySelector('#book-list')
+const maxResult = 25
+let startIndex = 0
+let APIdata
+
 
 //EVENTOS
-btnSearch.addEventListener('click', () => {
-    const elementoCardBook = criarElemento()
-    ulBookList.append(elementoCardBook)
+btnSearch.addEventListener('click', async () => {
+    APIdata = await getAPIdata()
+
+    for (let i = 0; i < APIdata.items.length; i ++) {
+        console.log(i)
+        let li = criarElemento(APIdata.items[i])
+        ulBookList.append(li)
+        
+    }
+        
+    startIndex += maxResult 
+
+    //https://www.googleapis.com/books/v1/volumes?q=guia%20do%20mochilleiro%20das%20galaxias&key=AIzaSyBFu-GXGYZ9_-BoUvyd3--CsXcQKmA-J6M
+    //const elementoCardBook = criarElemento()
+   // ulBookList.append(elementoCardBook)
 })
 
 //FUNCOES
-function criarElemento() {
+async function getAPIdata () {
+    const searchValue = searchbar.value
+    let apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${searchValue}&startIndex=${startIndex}&maxResults=${maxResult}&key=${APIkey}`
+
+    let res = await fetch(apiUrl)
+    let data = await res.json()
+
+    return data
+}
+
+function callAPI() {
+    
+}
+
+function criarElemento(obj) {
+    const textContentH2 = obj.volumeInfo.title
+    const textContentP = obj.volumeInfo.description
+    let imgUrl;
+
+    if ('imageLinks' in obj.volumeInfo) {
+         imgUrl = obj.volumeInfo.imageLinks.thumbnail
+    } else {
+         imgUrl ='/assets/img/Placeholder-cover-small.jpg'
+    }
+    //console.log(imgUrl = obj.volumeInfo.imageLinks.thumbnail)
+    
+    
+  
+ 
+    
     const li = document.createElement('li')
 
     const div1 = document.createElement('div')
     div1.classList.add('book-cover')
     const img = document.createElement('img')
-    img.setAttribute('src', 'https://books.google.com/books/content?id=RhqJWjZ_6o4C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api')
+    img.setAttribute('src', imgUrl)
     const button = document.createElement('button')
     button.textContent = '+'
 
@@ -26,9 +73,9 @@ function criarElemento() {
     const div2 = document.createElement('div')
     div2.classList.add('book-info')
     const h2 = document.createElement('h2')
-    h2.textContent = 'O Guia do Mochileiro das Galaxias'
+    h2.textContent = textContentH2
     const p = document.createElement('p')
-    p.textContent = 'Considerado um dos maiores clássicos da literatura de ficção científica, O Guia do Mochileiro das Galáxias vem encantando gerações de leitores ao redor do mundo com seu humor afiado. Este é o primeiro título da famosa série escrita por Douglas Adams, que conta as aventuras espaciais do inglês Arthur Dent e de seu amigo Ford Prefect. A dupla escapa da destruição da Terra pegando carona numa nave alienígena, graças aos conhecimentos de Prefect, um E.T. que vivia disfarçado de ator desempregado enquanto fazia pesquisa de campo para a nova edição do Guia do Mochileiro das Galáxias, o melhor guia de viagens interplanetário. Mestre da sátira, Douglas Adams cria personagens inesquecíveis e situações mirabolantes para debochar da burocracia, dos políticos, da \"alta cultura\" e de diversas instituições atuais. Seu livro, que trata em última instância da busca do sentido da vida, não só diverte como também faz pensar.'
+    p.textContent = textContentP
 
     div2.append(h2)
     div2.append(p)
