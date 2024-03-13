@@ -1,19 +1,60 @@
-.body {
-    
-}
-
 .modal {
     position: fixed;
-    background-color: rgba(0, 128, 0, 0.508);
+    background-color: rgba(0, 0, 0, 0.24);
     z-index: +1;
     width: 105vw;
     height: 105vh;
     margin-top: -100px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
 }
+
+.modal-header {
+    background-color: rgba(0, 0, 0, 0); 
+    width: 90vw;
+    height: 3em;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-top: -3em;
+}
+
+
+.modal-container {
+    background-color: var(--bg-color);  
+    width: 55em;
+    height: 40em; 
+    border-radius: 1em;
+    margin-top: -2em; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.modal-container-header {
+    width: 55%;
+    display: flex;
+    flex-direction: row;
+    padding: 1em;
+    background-color: grey;
+}
+
+.modal-container-header .modal-img {
+    margin: 0 2em 0 0;
+}
+
+.modal-container-header .modal-book-info {
+
+}
+
+.modal-container-header .modal-img img {
+    border-radius: 0.3em;
+}
+
 
 .hidden {
     visibility: hidden;

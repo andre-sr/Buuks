@@ -43,7 +43,9 @@ async function APIcall () {
         
     startIndex += maxResult 
 }
-
+//`https://www.googleapis.com/books/v1/volumes?q=naruto&key=AIzaSyBFu-GXGYZ9_-BoUvyd3--CsXcQKmA-J6M`
+//`https://www.googleapis.com/books/v1/volumes/SHsEEAAAQBAJ?key=AIzaSyBFu-GXGYZ9_-BoUvyd3--CsXcQKmA-J6M`
+//https://www.googleapis.com/books/v1/volumes/zyTCAlFPjgYC?key=SHsEEAAAQBAJ&key=AIzaSyBFu-GXGYZ9_-BoUvyd3--CsXcQKmA-J6M
 async function getAPIdata () {
     const searchValue = searchbar.value
     let apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${searchValue}&startIndex=${startIndex}&maxResults=${maxResult}&key=${APIkey}`
@@ -77,7 +79,7 @@ function criarElemento(obj) {
     }
     
     const li = document.createElement('li')
-
+    li.setAttribute('book-id', obj.id)
     const div1 = document.createElement('div')
     div1.classList.add('book-cover')
     const img = document.createElement('img')

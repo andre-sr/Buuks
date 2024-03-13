@@ -76,6 +76,7 @@ li {
 li img {
     border-radius: 0.3em;
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.599);
+    min-height: 12em;
 }
 
 li button {
