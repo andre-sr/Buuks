@@ -1,0 +1,21 @@
+.body {
+    
+}
+
+.modal {
+    position: fixed;
+    background-color: rgba(0, 128, 0, 0.508);
+    z-index: +1;
+    width: 105vw;
+    height: 105vh;
+    margin-top: -100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hidden {
+    visibility: hidden;
+    overflow: hidden;
+}

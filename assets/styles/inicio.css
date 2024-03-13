@@ -19,7 +19,7 @@ header h1 {
     font-size: 2em;
     font-weight: 700;
     padding: 5px;
-    text-shadow: 5px 5px 25px  rgba(0, 0, 0, 0.364);;
+    text-shadow: 5px 5px 25px  rgba(0, 0, 0, 0.364);
 }
 
 header input {
@@ -65,10 +65,17 @@ ul {
 li {
     position: relative;
     padding: 1em;
+    background-color: var(--primary-color);
+    border-radius: 0.3em;
+    box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.24);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 li img {
-    border-radius: 1em;
+    border-radius: 0.3em;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.599);
 }
 
 li button {
@@ -78,6 +85,7 @@ li button {
     border-radius: 50%;
     width: 2em;
     height: 2em;
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.777);
 }
 
 li button i {
@@ -87,7 +95,35 @@ li button i {
 li h2 {
     font-size: 1em;
     font-weight: 600; 
-    max-width: 12em;
+    overflow: hidden;
+    position: relative;
+    line-height: 0.9em;
+    max-width: 8.4em;
+    max-height: 0.9em; 
+    text-align: start; 
+
+}
+
+li h2:after {
+    content: '...';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding-left: 1em;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), var(--primary-color) 48%);
+}
+
+li span {
+    margin-top: 4px;
+    width: 8em;
+    display: flex;
+    line-height: 0.9em;
+    max-height: 0.9em; 
+}
+
+li span i {
+    font-size: 0.7em;
+    padding: 0 3px;
 }
 
 li p {
@@ -95,22 +131,20 @@ li p {
     overflow: hidden;
     position: relative;
     line-height: 1em;
-    max-width: 12em;
+    max-width: 8em;
     max-height: 4em; 
     text-align: justify; 
     margin-right: -1em; 
-  }
+}
 
 li p:after {
-    content: '...';
     position: absolute;
     bottom: 0;
     right: 0;
     padding-left: 1em;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0), white 48%);
-  }
+}
 
-  #btn-show-more {
+#btn-show-more {
     box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.178);
     margin: 1em;
-  }
+}

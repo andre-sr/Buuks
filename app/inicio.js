@@ -19,11 +19,17 @@ btnSearch.addEventListener('click', async () => {
     while (ulBookList.firstChild) {
         ulBookList.removeChild(ulBookList.firstChild)
     }
-    APIcall ()
+    await APIcall ()
+
+    const evento = new CustomEvent('btnSearchPress')
+    document.dispatchEvent(evento)
 })
 
 btnShowMore.addEventListener('click', async () => {
-    APIcall ()
+    await APIcall ()
+
+    const evento = new CustomEvent('btnShowMorePress')
+    document.dispatchEvent(evento)
 })
 
 //FUNCOES
@@ -31,7 +37,6 @@ async function APIcall () {
     APIdata = await getAPIdata()
 
     for (let i = 0; i < APIdata.items.length; i ++) {
-        console.log(i)
         let li = criarElemento(APIdata.items[i])
         ulBookList.append(li)
     }
@@ -55,13 +60,20 @@ function callAPI() {
 
 function criarElemento(obj) {
     const textContentH2 = obj.volumeInfo.title
-    const textContentP = obj.volumeInfo.description
+    let authors = obj.volumeInfo.authors
+    let averageRating; 
     let imgUrl;
 
     if ('imageLinks' in obj.volumeInfo) {
-         imgUrl = obj.volumeInfo.imageLinks.thumbnail
+        imgUrl = obj.volumeInfo.imageLinks.thumbnail
     } else {
-         imgUrl ='/assets/img/Placeholder-cover-small.jpg'
+        imgUrl ='/assets/img/Placeholder-cover-small.jpg'
+    }
+
+    if ('averageRating' in obj.volumeInfo) {
+        averageRating = obj.volumeInfo.averageRating
+    } else {
+        averageRating ='-'
     }
     
     const li = document.createElement('li')
@@ -69,9 +81,10 @@ function criarElemento(obj) {
     const div1 = document.createElement('div')
     div1.classList.add('book-cover')
     const img = document.createElement('img')
+    img.classList.add('img-book-cover')
     img.setAttribute('src', imgUrl)
     const button = document.createElement('button')
-    button.textContent = '+'
+    button.innerHTML = '<i class="fa-solid fa-plus"></i>'
 
     div1.append(img)
     div1.append(button)
@@ -81,11 +94,14 @@ function criarElemento(obj) {
     div2.classList.add('book-info')
     const h2 = document.createElement('h2')
     h2.textContent = textContentH2
+    const span = document.createElement('span')
+    span.innerHTML = `${averageRating}<i class="fa-solid fa-star"></i>`
     const p = document.createElement('p')
-    p.textContent = textContentP
+    p.textContent = authors
+    span.append(p)
 
     div2.append(h2)
-    div2.append(p)
+    div2.append(span)
     li.append(div2)
 
     return li
