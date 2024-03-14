@@ -54,12 +54,19 @@ function creatorModal() {
     while (modalContainerElement.firstChild) {
         modalContainerElement.removeChild(modalContainerElement.firstChild)
     }
+    let averageRating; 
     let imgUrl;
 
+    if ('averageRating' in bookData.volumeInfo) {
+        averageRating = bookData.volumeInfo.averageRating
+    } else {
+        averageRating ='-'
+    }
+    
     if ('imageLinks' in bookData.volumeInfo) {
         imgUrl = bookData.volumeInfo.imageLinks.thumbnail
     } else {
-        imgUrl ='/assets/img/Placeholder-cover-small.jpg'
+        imgUrl = '/assets/img/Placeholder-cover-small.jpg'
     }
 
 
@@ -77,16 +84,36 @@ function creatorModal() {
 
     const divBookInfo = document.createElement('div')
     divBookInfo.classList.add('modal-book-info')
+    const divBookInfoMeta = document.createElement('div')
+    divBookInfoMeta.classList.add('modal-book-info-meta')
+
     const h1 = document.createElement('h1')
     h1.textContent = bookData.volumeInfo.title
     const h2 = document.createElement('h2')
     h2.textContent =  bookData.volumeInfo.authors
-    
-    divBookInfo.append(h1, h2)
+    const span = document.createElement('span')
+    span.innerHTML = `${averageRating}<i class="fa-solid fa-star"></i>`
+
+    const aPlayBooksBtn = document.createElement('a')
+    aPlayBooksBtn.classList.add('modal-btn-play-books')
+    aPlayBooksBtn.setAttribute('href', bookData.volumeInfo.infoLink)
+    aPlayBooksBtn.setAttribute('target', '_blank')
+
+    const imgPlayBooksBtn = document.createElement('img')
+    imgPlayBooksBtn.setAttribute('src', '/assets/img/play-books-logo-small.png')
+
+    aPlayBooksBtn.append(imgPlayBooksBtn)
+
+
+    divBookInfoMeta.append(h1, h2,span)
+    divBookInfo.append(divBookInfoMeta)
+    divBookInfo.append(aPlayBooksBtn)
+
+
     divHeader.append(divBookInfo)
 
     const divDescription = document.createElement('div')
-    divDescription.classList.add('modal-container-header')
+    divDescription.classList.add('modal-container-discription')
     
     divDescription.innerHTML = bookData.volumeInfo.description
 

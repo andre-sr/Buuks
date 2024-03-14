@@ -26,12 +26,13 @@
 .modal-container {
     background-color: var(--bg-color);  
     width: 55em;
-    height: 40em; 
+    height: 35em; 
     border-radius: 1em;
     margin-top: -2em; 
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 2em;
     
 }
 
@@ -40,7 +41,7 @@
     display: flex;
     flex-direction: row;
     padding: 1em;
-    background-color: grey;
+    background-color: rgba(128, 128, 128, 0);
 }
 
 .modal-container-header .modal-img {
@@ -48,13 +49,35 @@
 }
 
 .modal-container-header .modal-book-info {
-
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .modal-container-header .modal-img img {
     border-radius: 0.3em;
 }
 
+.modal-container-header .modal-book-info .modal-btn-play-books {
+    cursor: pointer;
+    padding: 1em;
+}
+
+.modal-container-header .modal-book-info .modal-btn-play-books img {
+    border-radius: 0.3em;
+}
+
+.modal-container-discription {
+    width: 38em;
+    margin-top: 1.5em;
+    overflow: auto;
+}
+
+.modal-container-discription {
+    text-align: justify;
+    line-height: 1.4em;
+    
+}
 
 .hidden {
     visibility: hidden;

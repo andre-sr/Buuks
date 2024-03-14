@@ -14,15 +14,13 @@ let APIdata
 
 //EVENTOS
 btnSearch.addEventListener('click', async () => {
-    APIdata = null
-    startIndex = 0
-    while (ulBookList.firstChild) {
-        ulBookList.removeChild(ulBookList.firstChild)
-    }
-    await APIcall ()
+    dealWithAPIcall ()
+})
 
-    const evento = new CustomEvent('btnSearchPress')
-    document.dispatchEvent(evento)
+searchbar.addEventListener('keydown', async (event) => {
+    if (event.key === "Enter") {
+        dealWithAPIcall ()
+    }   
 })
 
 btnShowMore.addEventListener('click', async () => {
@@ -33,6 +31,18 @@ btnShowMore.addEventListener('click', async () => {
 })
 
 //FUNCOES
+async function dealWithAPIcall () {
+    APIdata = null
+    startIndex = 0
+    while (ulBookList.firstChild) {
+        ulBookList.removeChild(ulBookList.firstChild)
+    }
+    await APIcall ()
+
+    const evento = new CustomEvent('btnSearchPress')
+    document.dispatchEvent(evento)
+}
+
 async function APIcall () {
     APIdata = await getAPIdata()
 
