@@ -66,6 +66,7 @@ function creatorModal() {
 
     const divHeader = document.createElement('div')
     divHeader.classList.add('modal-container-header')
+
     const divImg = document.createElement('div')
     divImg.classList.add('modal-img')
     const img = document.createElement('img')
@@ -74,6 +75,23 @@ function creatorModal() {
     divImg.append(img)
     divHeader.append(divImg)
 
-    modalContainerElement.append(divHeader)
+    const divBookInfo = document.createElement('div')
+    divBookInfo.classList.add('modal-book-info')
+    const h1 = document.createElement('h1')
+    h1.textContent = bookData.volumeInfo.title
+    const h2 = document.createElement('h2')
+    h2.textContent =  bookData.volumeInfo.authors
+    
+    divBookInfo.append(h1, h2)
+    divHeader.append(divBookInfo)
 
+    const divDescription = document.createElement('div')
+    divDescription.classList.add('modal-container-header')
+    
+    divDescription.innerHTML = bookData.volumeInfo.description
+
+   
+
+    modalContainerElement.append(divHeader)
+    modalContainerElement.append(divDescription)
 }
