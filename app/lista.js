@@ -1,5 +1,5 @@
 //VARIAVEIS
-let bookList = [] 
+let bookList = JSON.parse(localStorage.getItem('bookList')) || []
 
 //EVENTOS 
 
@@ -7,7 +7,9 @@ let bookList = []
 //FUNCOES
 
 function bookToList(bookId, bookElement) {
-    if (bookList.includes(bookId)) {
+    const bookIdTest = bookList.find(bookList => bookList.id === bookId) || null
+
+    if (bookIdTest) {
         removeBook(bookId, bookElement)
         return
     }
@@ -18,10 +20,10 @@ function addBook(bookId,bookElement) {
     console.log('FLAMENGO')
 
     const book = {
-        id: bookId
+        id: bookId,
     }
 
-    bookList.push(bookId)
+    bookList.push(book)
     bookElement.childNodes[0].childNodes[1].innerHTML = '<i class="fa-solid fa-minus"></i>'
 }
 
@@ -29,7 +31,27 @@ function removeBook(bookId,bookElement) {
     console.log("hahahahaha")
     bookElement.childNodes[0].childNodes[1].innerHTML = '<i class="fa-solid fa-plus"></i>'
 
-    const indexToRemove = bookList.indexOf(bookId)
-    bookList.splice(indexToRemove, 1);
-    
+    for (let i = 0; i < bookList.length; i++) {
+        if (bookList[i].id === bookId){
+            
+            bookList.splice(i, 1)
+            break
+        }
+    }    
 }
+
+function sendToLocalStorage() {
+    const bookListString = JSON.stringify(bookList)
+    console.log(bookListString)
+    localStorage.setItem('bookList', bookListString)
+}
+
+function constructor() {
+    for (let i = 0; i < bookList.length; i++) {
+
+        criarElemento(bookList[i])
+    }
+}
+
+//LOAD PAGE
+dealWithAPIcall ()

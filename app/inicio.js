@@ -6,7 +6,6 @@ const ulBookList = document.querySelector('#book-list')
 const btnShowMore = document.querySelector('#btn-show-more')
 
 
-
 const maxResult = 25
 let startIndex = 0
 let APIdata
@@ -53,9 +52,7 @@ async function APIcall () {
         
     startIndex += maxResult 
 }
-//`https://www.googleapis.com/books/v1/volumes?q=naruto&key=AIzaSyBFu-GXGYZ9_-BoUvyd3--CsXcQKmA-J6M`
-//`https://www.googleapis.com/books/v1/volumes/SHsEEAAAQBAJ?key=AIzaSyBFu-GXGYZ9_-BoUvyd3--CsXcQKmA-J6M`
-//https://www.googleapis.com/books/v1/volumes/zyTCAlFPjgYC?key=SHsEEAAAQBAJ&key=AIzaSyBFu-GXGYZ9_-BoUvyd3--CsXcQKmA-J6M
+
 async function getAPIdata () {
     const searchValue = searchbar.value
     let apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${searchValue}&startIndex=${startIndex}&maxResults=${maxResult}&key=${APIkey}`
@@ -64,10 +61,6 @@ async function getAPIdata () {
     let data = await res.json()
 
     return data
-}
-
-function callAPI() {
-    
 }
 
 function criarElemento(obj) {

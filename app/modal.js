@@ -1,7 +1,4 @@
 //VARIAVEIS
-//const imgBookCover = document.querySelector('')
-///const btnSearch = document.querySelector('#btn-search')
-//const btnShowMore = document.querySelector('#btn-show-more')
 const modalElement = document.querySelector('.modal')
 const modalContainerElement = document.querySelector('.modal-container')
 const btnX = document.querySelector('#btn-x')
@@ -22,7 +19,6 @@ btnX.addEventListener('click', () => {
 
 //FUNCOES
 function eventListenerCreator() {
-    //debugger
     const imgBookCoverElement = document.querySelectorAll('.img-book-cover')
     const liAll = document.querySelectorAll('li')
     const btnAddBook = document.querySelectorAll('.btn-add-book')
@@ -72,8 +68,6 @@ function creatorModal() {
         imgUrl = '/assets/img/Placeholder-cover-small.jpg'
     }
 
-
-
     const divHeader = document.createElement('div')
     divHeader.classList.add('modal-container-header')
 
@@ -107,7 +101,6 @@ function creatorModal() {
 
     aPlayBooksBtn.append(imgPlayBooksBtn)
 
-
     divBookInfoMeta.append(h1, h2,span)
     divBookInfo.append(divBookInfoMeta)
     divBookInfo.append(aPlayBooksBtn)
@@ -120,7 +113,6 @@ function creatorModal() {
     
     divDescription.innerHTML = bookData.volumeInfo.description
 
-   
 
     modalContainerElement.append(divHeader)
     modalContainerElement.append(divDescription)
