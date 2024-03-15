@@ -23,25 +23,28 @@ btnX.addEventListener('click', () => {
 //FUNCOES
 function eventListenerCreator() {
     //debugger
+    const imgBookCoverElement = document.querySelectorAll('.img-book-cover')
     const liAll = document.querySelectorAll('li')
+    const btnAddBook = document.querySelectorAll('.btn-add-book')
 
     for (let i = 0; i < liAll.length; i++) {
-        liAll[i].addEventListener('click', () => {
-            console.log('ai')
+        imgBookCoverElement[i].addEventListener('click', () => {
             createModal(liAll[i].getAttribute('book-id'))
+        })
+
+        btnAddBook[i].addEventListener('click', () => {
+            bookToList(liAll[i].getAttribute('book-id'), liAll[i])
         })
     }
 }
 
 async function createModal(bookId) {
-    console.log(bookId)
     bookData = await getAPIbookData(bookId)
     modalElement.classList.toggle('hidden')
     creatorModal()
 }
 
 async function getAPIbookData(bookId) {
-    console.log(bookId)
     let APIurl = `https://www.googleapis.com/books/v1/volumes/${bookId}?key=${APIkey}`
 
     let res = await fetch(APIurl)

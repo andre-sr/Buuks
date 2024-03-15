@@ -96,6 +96,7 @@ function criarElemento(obj) {
     img.classList.add('img-book-cover')
     img.setAttribute('src', imgUrl)
     const button = document.createElement('button')
+    button.classList.add('btn-add-book')
     button.innerHTML = '<i class="fa-solid fa-plus"></i>'
 
     div1.append(img)
