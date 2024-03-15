@@ -1,4 +1,6 @@
 //VARIAVEIS
+const ulUserBookList = document.querySelector('#user-book-list')
+
 let bookList = JSON.parse(localStorage.getItem('bookList')) || []
 
 //EVENTOS 
@@ -6,15 +8,7 @@ let bookList = JSON.parse(localStorage.getItem('bookList')) || []
 
 //FUNCOES
 
-function bookToList(bookId, bookElement) {
-    const bookIdTest = bookList.find(bookList => bookList.id === bookId) || null
 
-    if (bookIdTest) {
-        removeBook(bookId, bookElement)
-        return
-    }
-    addBook(bookId,bookElement)
-}
 
 function addBook(bookId,bookElement) {
     console.log('FLAMENGO')
@@ -46,12 +40,22 @@ function sendToLocalStorage() {
     localStorage.setItem('bookList', bookListString)
 }
 
-function constructor() {
-    for (let i = 0; i < bookList.length; i++) {
+async function constructor() {
 
-        criarElemento(bookList[i])
+    for (let i = 0; i < bookList.length; i++) {
+        bookData = await getAPIbookData(bookList[i].id)
+        const li = criarElemento(bookData)
+        ulUserBookList.append(li)
     }
+    eventListenerCreator()
+}
+
+async function singleBookCall () {
+   // const bookInfo;
+
+   
+
 }
 
 //LOAD PAGE
-dealWithAPIcall ()
+constructor()
